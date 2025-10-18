@@ -1,5 +1,6 @@
 const library = []
 
+const tableBody = document.querySelector("table tbody")
 const form = document.querySelector("form")
 const dialog = document.querySelector("dialog")
 const exitButton = document.getElementById("exitButton")
@@ -28,7 +29,7 @@ submitButton.addEventListener("click", (e) => {
         const finalBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked)
         finalBook.addBooktoLibrary(finalBook)
         console.log(library)
-        dialog.querySelector("form").reset()
+        form.reset()
     }
 })
 
@@ -44,8 +45,23 @@ Book.prototype.addBooktoLibrary = function(newBook){
     library.push(newBook)
 }
 
+Book.prototype.addBooktoTable = function(newBook) {
+    const tableRow = tableBody.insertRow(-1)
+    const firstCell = tableRow.insertCell(0)
+    const secondCell = tableRow.insertCell(1)
+    const thirdCell = tableRow.insertCell(2)
+    const fourthCell = tableRow.insertCell(3)
+
+    firstCell.innerHTML = newBook.title
+    secondCell.innerHTML = newBook.author
+    thirdCell.innerHTML = newBook.pages
+    fourthCell.innerHTML = newBook.read
+}
+
 const book1 = new Book("Harry Potter", "JK Rowling", 220, false)
 const book2 = new Book("Black Swan", "Your Mother", 254, true)
 book1.addBooktoLibrary(book1);
 book2.addBooktoLibrary(book2);
+book1.addBooktoTable(book1);
+book2.addBooktoTable(book2);
 console.log(library)
