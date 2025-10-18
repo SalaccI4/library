@@ -1,5 +1,6 @@
 const library = []
 
+const form = document.querySelector("form")
 const dialog = document.querySelector("dialog")
 const exitButton = document.getElementById("exitButton")
 const submitButton = document.getElementById("submitButton")
@@ -21,10 +22,14 @@ exitButton.addEventListener("click", (e) => {
 })
 
 submitButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    dialog.close()
-    console.log(titleInput.value + authorInput.value + pagesInput.value + readInput.value)
-    dialog.querySelector("form").reset()
+    if (form.checkValidity()){
+        e.preventDefault()
+        dialog.close()
+        const finalBook = new Book(titleInput.value, authorInput.value, pagesInput.value, readInput.checked)
+        finalBook.addBooktoLibrary(finalBook)
+        console.log(library)
+        dialog.querySelector("form").reset()
+    }
 })
 
 function Book(title, author, pages, read){
