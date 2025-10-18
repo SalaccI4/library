@@ -2,14 +2,29 @@ const library = []
 
 const dialog = document.querySelector("dialog")
 const exitButton = document.getElementById("exitButton")
+const submitButton = document.getElementById("submitButton")
 const newBookButton = document.getElementById("newBookButton")
+
+const titleInput = document.querySelector('input[name="title"]')
+const authorInput = document.querySelector('input[name="author"]')
+const pagesInput = document.querySelector('input[name="pages"]')
+const readInput = document.querySelector('input[name="read"]')
 
 newBookButton.addEventListener("click", () => {
     dialog.showModal()
 })
 
-exitButton.addEventListener("click", () => {
+exitButton.addEventListener("click", (e) => {
+    e.preventDefault()
     dialog.close()
+    dialog.querySelector("form").reset()
+})
+
+submitButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    dialog.close()
+    console.log(titleInput.value + authorInput.value + pagesInput.value + readInput.value)
+    dialog.querySelector("form").reset()
 })
 
 function Book(title, author, pages, read){
