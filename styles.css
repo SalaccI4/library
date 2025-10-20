@@ -1,5 +1,14 @@
 table, td{
     border: 2px, solid, black;
-    font-size: 4rem;
+    font-size: 3rem;
     padding: 0.5rem;
+}
+
+th{
+    font-size: 2rem;
+}
+
+button{
+    width: 5rem;
+    height: 2rem;
 }
