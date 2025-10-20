@@ -77,6 +77,15 @@ Book.prototype.addBooktoTable = function(newBook) {
         }
     })
 
+    delButton.addEventListener("click", (e) => {
+        const row = e.target.closest("tr")
+        const index = library.findIndex(book => book.id == newBook.id);
+        if (index !== -1) {
+            library.splice(index, 1);
+        }
+        row.remove()
+    })
+
     firstCell.innerHTML = newBook.title
     secondCell.innerHTML = newBook.author
     thirdCell.innerHTML = newBook.pages
