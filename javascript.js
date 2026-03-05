@@ -42,58 +42,60 @@ submitButton.addEventListener("click", (e) => {
     }
 })
 
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.id = crypto.randomUUID();
-}
+class Book {
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = crypto.randomUUID();
+    }
 
-Book.prototype.addBooktoLibrary = function(newBook){
-    library.push(newBook)
-}
+    addBooktoLibrary(newBook){
+        library.push(newBook)
+    }
 
-Book.prototype.addBooktoTable = function(newBook) {
-    const readButton = document.createElement("button")
-    const delButton = document.createElement("button")
-    
-    const tableRow = tableBody.insertRow(-1)
-    const firstCell = tableRow.insertCell(0)
-    const secondCell = tableRow.insertCell(1)
-    const thirdCell = tableRow.insertCell(2)
-    const fourthCell = tableRow.insertCell(3)
-    const fifthCell = tableRow.insertCell(4)
-    const sixthCell = tableRow.insertCell(5)
+    addBooktoTable(newBook){
+        const readButton = document.createElement("button")
+        const delButton = document.createElement("button")
 
-    readButton.addEventListener("click", () => {
-        if (newBook.read == "Read"){
-            newBook.read = "Not Read"
-            fourthCell.innerHTML = newBook.read
-        }
-        else if (newBook.read == "Not Read"){
-            newBook.read = "Read"
-            fourthCell.innerHTML = newBook.read
-        }
-    })
+        const tableRow = tableBody.insertRow(-1)
+        const firstCell = tableRow.insertCell(0)
+        const secondCell = tableRow.insertCell(1)
+        const thirdCell = tableRow.insertCell(2)
+        const fourthCell = tableRow.insertCell(3)
+        const fifthCell = tableRow.insertCell(4)
+        const sixthCell = tableRow.insertCell(5)
 
-    delButton.addEventListener("click", (e) => {
-        const row = e.target.closest("tr")
-        const index = library.findIndex(book => book.id == newBook.id);
-        if (index !== -1) {
-            library.splice(index, 1);
-        }
-        row.remove()
-    })
+        readButton.addEventListener("click", () => {
+            if (newBook.read == "Read") {
+                newBook.read = "Not Read"
+                fourthCell.innerHTML = newBook.read
+            }
+            else if (newBook.read == "Not Read") {
+                newBook.read = "Read"
+                fourthCell.innerHTML = newBook.read
+            }
+        })
 
-    firstCell.innerHTML = newBook.title
-    secondCell.innerHTML = newBook.author
-    thirdCell.innerHTML = newBook.pages
-    fourthCell.innerHTML = newBook.read
-    fifthCell.append(readButton)
-    readButton.innerHTML = "Change"
-    sixthCell.append(delButton)
-    delButton.innerHTML = "Delete"
+        delButton.addEventListener("click", (e) => {
+            const row = e.target.closest("tr")
+            const index = library.findIndex(book => book.id == newBook.id);
+            if (index !== -1) {
+                library.splice(index, 1);
+            }
+            row.remove()
+        })
+
+        firstCell.innerHTML = newBook.title
+        secondCell.innerHTML = newBook.author
+        thirdCell.innerHTML = newBook.pages
+        fourthCell.innerHTML = newBook.read
+        fifthCell.append(readButton)
+        readButton.innerHTML = "Change"
+        sixthCell.append(delButton)
+        delButton.innerHTML = "Delete"
+    }
 }
 
 const book1 = new Book("Harry Potter", "JK Rowling", 220, "Not Read")
